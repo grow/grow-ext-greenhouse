@@ -41,7 +41,7 @@ class GreenhousePreprocessor(grow.Preprocessor):
     def bind_jobs(self, board_token, collection_path):
         url = GreenhousePreprocessor.JOBS_URL.format(board_token=board_token)
         resp = requests.get(url)
-	if resp.status_code != 200:
+        if resp.status_code != 200:
             raise Error('Error requesting -> {}'.format(url))
         content = resp.json()
         self._bind(collection_path, content['jobs'])
@@ -71,12 +71,12 @@ class GreenhousePreprocessor(grow.Preprocessor):
         schools = self._download_schools(board_token)
         url = GreenhousePreprocessor.DEGREES_URL.format(board_token=board_token)
         resp = requests.get(url)
-	if resp.status_code != 200:
+        if resp.status_code != 200:
             raise Error('Error requesting -> {}'.format(url))
         degrees = resp.json()
         url = GreenhousePreprocessor.DISCIPLINES_URL.format(board_token=board_token)
         resp = requests.get(url)
-	if resp.status_code != 200:
+        if resp.status_code != 200:
             raise Error('Error requesting -> {}'.format(url))
         disciplines = resp.json()
         item = {
@@ -117,7 +117,7 @@ class GreenhousePreprocessor(grow.Preprocessor):
         url = GreenhousePreprocessor.JOB_URL.format(
                 board_token=board_token, job_id=item['id'])
         resp = requests.get(url)
-	if resp.status_code != 200:
+        if resp.status_code != 200:
             raise Error('Error requesting -> {}'.format(url))
         content = resp.json()
         return content
@@ -135,8 +135,8 @@ class GreenhousePreprocessor(grow.Preprocessor):
             skip = False
             for name in department_names:
                 if name in departments_blacklist:
-                   self.pod.logger.info('Skipping department -> {}'.format(name))
-                   skip = True
+                    self.pod.logger.info('Skipping department -> {}'.format(name))
+                    skip = True
             if skip:
                 continue
             item = self._get_single_job(item)
