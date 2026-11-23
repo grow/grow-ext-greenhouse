@@ -1,18 +1,13 @@
-api_version: 1
-runtime: python27
-service: greenhouse
-threadsafe: true
+runtime: python312
+entrypoint: gunicorn -b :$PORT -w 2 main:app
 
-libraries:
-- name: ssl
-  version: 2.7.11
-
-env_variables:
-  # Test.
-  # GREENHOUSE_API_KEY: '6fac757fbff35755beeaf0cd40e5a4f7-1'
-  # Prod.
-  GREENHOUSE_API_KEY: 'c7d5062e5e6102250ff9ead7e5f20965-1'
+# Required security configuration:
+# env_variables:
+#   ALLOWED_BOARD_TOKENS: "my-company-board"
+#   CORS_ALLOWED_ORIGINS: "https://example.com"
+#   GREENHOUSE_API_KEY: "<secret>"
 
 handlers:
-- url: /.*
-  script: main.app
+  - url: .*
+    script: auto
+    secure: always
